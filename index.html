@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="theme-light font-md">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini Spark：打造智慧教學與自動化備課的 AI 新紀元 | 慈大附中研習手冊</title>
+  <meta name="description" content="20261124 慈大附中 Gemini Spark 智慧教學與自動化備課實戰手冊，講師：李燕秋老師。包含跨校課綱分析、教學計畫表檢核、講義精煉轉簡報、Gmail 智慧排程與試題評量數據分析。">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans TC"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: 'var(--brand-50)',
+              100: 'var(--brand-100)',
+              200: 'var(--brand-200)',
+              500: 'var(--brand-500)',
+              600: 'var(--brand-600)',
+              700: 'var(--brand-700)',
+              800: 'var(--brand-800)',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* 主題色系變數配置 */
+    :root {
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-sub: #f1f5f9;
+      --border-color: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --brand-50: #eff6ff;
+      --brand-100: #dbeafe;
+      --brand-200: #bfdbfe;
+      --brand-500: #3b82f6;
+      --brand-600: #2563eb;
+      --brand-700: #1d4ed8;
+      --brand-800: #1e40af;
+      --prompt-bg: #f8fafc;
+      --prompt-border: #cbd5e1;
+    }
+
+    /* 深色主題 */
+    html.theme-dark {
+      --bg-main: #090d16;
+      --bg-card: #131b2e;
+      --bg-sub: #1e293b;
+      --border-color: #27354f;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --brand-50: #1e293b;
+      --brand-100: #1e3a8a;
+      --brand-200: #2563eb;
+      --brand-500: #38bdf8;
+      --brand-600: #0ea5e9;
+      --brand-700: #0284c7;
+      --brand-800: #0369a1;
+      --prompt-bg: #0b1120;
+      --prompt-border: #334155;
+    }
+
+    /* 綠色護眼主題 */
+    html.theme-green {
+      --bg-main: #f0fdf4;
+      --bg-card: #ffffff;
+      --bg-sub: #dcfce7;
+      --border-color: #bbf7d0;
+      --text-main: #14532d;
+      --text-muted: #166534;
+      --brand-50: #f0fdf4;
+      --brand-100: #dcfce7;
+      --brand-200: #bbf7d0;
+      --brand-500: #22c55e;
+      --brand-600: #16a34a;
+      --brand-700: #15803d;
+      --brand-800: #166534;
+      --prompt-bg: #f7fee7;
+      --prompt-border: #86efac;
+    }
+
+    /* 藍色慈大海洋主題 */
+    html.theme-blue {
+      --bg-main: #f0f9ff;
+      --bg-card: #ffffff;
+      --bg-sub: #e0f2fe;
+      --border-color: #bae6fd;
+      --text-main: #0c4a6e;
+      --text-muted: #0369a1;
+      --brand-50: #f0f9ff;
+      --brand-100: #e0f2fe;
+      --brand-200: #bae6fd;
+      --brand-500: #0284c7;
+      --brand-600: #0369a1;
+      --brand-700: #075985;
+      --brand-800: #0c4a6e;
+      --prompt-bg: #f8fafc;
+      --prompt-border: #7dd3fc;
+    }
+
+    /* 字型尺寸控制 */
+    html.font-md { font-size: 16px; }
+    html.font-lg { font-size: 18px; }
+    html.font-xl { font-size: 20px; }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      transition: background-color 0.25s ease, color 0.25s ease;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    .bg-custom-card { background-color: var(--bg-card); }
+    .bg-custom-sub { background-color: var(--bg-sub); }
+    .border-custom { border-color: var(--border-color); }
+    .text-custom-muted { color: var(--text-muted); }
+    .prompt-box {
+      background-color: var(--prompt-bg);
+      border-color: var(--prompt-border);
+    }
+
+    /* 滾動條美化 */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(100, 116, 139, 0.3);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(100, 116, 139, 0.5);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
+
+  <!-- ==================== 門禁防護層 (研習內部通行認證) ==================== -->
+  <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-md p-4 transition-all duration-300">
+    <div class="bg-custom-card w-full max-w-md rounded-2xl shadow-2xl border border-custom p-7 text-center relative overflow-hidden">
+      <!-- 裝飾色塊 -->
+      <div class="absolute -top-16 -left-16 w-36 h-36 bg-blue-500/20 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="absolute -bottom-16 -right-16 w-36 h-36 bg-indigo-500/20 rounded-full blur-2xl pointer-events-none"></div>
+
+      <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-inner">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+      </div>
+
+      <h3 class="text-2xl font-bold mb-2">研習專屬資源驗證</h3>
+      <p class="text-custom-muted text-sm mb-6 leading-relaxed">
+        歡迎參與【慈大附中】Gemini Spark 研習課程！<br>本網站彙整李燕秋老師課堂提詞與備課素材，請輸入通行碼以解鎖完整內容。
+      </p>
+
+      <form id="authForm" onsubmit="handleAuthSubmit(event)" class="space-y-4">
+        <div>
+          <input 
+            type="password" 
+            id="accessKeyInput" 
+            placeholder="請輸入研習通行碼" 
+            autocomplete="current-password"
+            class="w-full px-4 py-3 rounded-xl border border-custom bg-custom-sub text-center tracking-widest text-lg font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            required
+            autofocus
+          />
+        </div>
+        <div id="authErrorMsg" class="hidden text-rose-500 text-sm font-medium animate-pulse">
+          通行碼驗證不符，請重新確認後輸入。
+        </div>
+        <button 
+          type="submit" 
+          class="w-full py-3.5 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/25 transition-all transform active:scale-98 flex items-center justify-center space-x-2"
+        >
+          <span>驗證並進入工作台</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+      </form>
+      <div class="mt-4 text-xs text-custom-muted">
+        密鑰驗證由瀏覽器原生 Web Crypto API 進行加密比對
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 頂部導航列 (控制面板) ==================== -->
+  <header class="sticky top-0 z-40 bg-custom-card/95 backdrop-blur-md border-b border-custom transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- 左側：品牌識別與課程標題 -->
+        <div class="flex items-center space-x-3.5">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20 font-bold text-xl flex-shrink-0">
+            ✨
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="px-2 py-0.5 text-xs font-semibold rounded bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300">
+                20261124 慈大附中
+              </span>
+              <span class="px-2 py-0.5 text-xs font-medium rounded bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300">
+                李燕秋 老師
+              </span>
+            </div>
+            <h1 class="text-lg sm:text-xl font-bold tracking-tight line-clamp-1">
+              Gemini Spark：打造智慧教學與自動化備課的 AI 新紀元
+            </h1>
+          </div>
+        </div>
+
+        <!-- 右側：控制按鈕 (字級、主題、重新上鎖) -->
+        <div class="flex items-center space-x-2 sm:space-x-4">
+          
+          <!-- 字級調整 -->
+          <div class="flex items-center bg-custom-sub p-1 rounded-xl border border-custom text-xs font-medium">
+            <span class="hidden md:inline-block px-2 text-custom-muted">字級</span>
+            <button onclick="setFontSize('md')" id="btn-font-md" class="px-2.5 py-1 rounded-lg transition-colors font-semibold" title="中字型">中</button>
+            <button onclick="setFontSize('lg')" id="btn-font-lg" class="px-2.5 py-1 rounded-lg transition-colors font-semibold" title="大字型">大</button>
+            <button onclick="setFontSize('xl')" id="btn-font-xl" class="px-2.5 py-1 rounded-lg transition-colors font-semibold" title="特大字型">特大</button>
+          </div>
+
+          <!-- 布景主題選擇 -->
+          <div class="flex items-center bg-custom-sub p-1 rounded-xl border border-custom text-xs font-medium">
+            <span class="hidden md:inline-block px-2 text-custom-muted">布景</span>
+            <button onclick="setTheme('light')" id="btn-theme-light" class="px-2.5 py-1 rounded-lg transition-colors" title="淺色主題">☀️ 淺</button>
+            <button onclick="setTheme('dark')" id="btn-theme-dark" class="px-2.5 py-1 rounded-lg transition-colors" title="深色主題">🌙 深</button>
+            <button onclick="setTheme('green')" id="btn-theme-green" class="px-2.5 py-1 rounded-lg transition-colors" title="綠色護眼">🌿 綠</button>
+            <button onclick="setTheme('blue')" id="btn-theme-blue" class="px-2.5 py-1 rounded-lg transition-colors" title="藍色科技">🌊 藍</button>
+          </div>
+
+          <!-- 重新上鎖按鈕 -->
+          <button 
+            onclick="relockSite()" 
+            class="p-2.5 rounded-xl border border-custom hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950/40 text-custom-muted transition-colors" 
+            title="重新鎖定研習手冊"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== 頂部重要橫幅 (講師與速達連結) ==================== -->
+  <section class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-800 text-white py-6 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center space-x-2 text-blue-200 text-xs font-mono mb-1">
+            <span>📅 2026.11.24 慈大附中 AI 教師增能研習</span>
+            <span>•</span>
+            <span>Google Workspace × Gemini Spark 備課革命</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            智慧教學與自動化備課的 AI 新紀元
+          </h2>
+          <p class="text-blue-100 text-sm mt-1 max-w-3xl">
+            將繁重的教學大綱比對、教學計畫表撰寫、簡報備忘稿重組、信箱工作排程與學習成效評量分析，化為精準可執行的提詞流水線。
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5">
+          <a 
+            href="https://gemini.google.com/" 
+            target="_blank" 
+            rel="noopener" 
+            class="px-4 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-xl text-sm font-medium transition-all flex items-center space-x-1.5 shadow"
+          >
+            <span>🚀 前往 Gemini</span>
+            <svg class="w-4 h-4 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          </a>
+          <a 
+            href="https://drive.google.com/drive/folders/1WoHRE3nmrIHPghEgaPfnzLA6O--dSVWE?usp=sharing" 
+            target="_blank" 
+            rel="noopener" 
+            class="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-slate-900 rounded-xl text-sm font-bold transition-all flex items-center space-x-1.5 shadow-lg"
+          >
+            <span>📁 課程素材雲端硬碟</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          </a>
+          <a 
+            href="https://hackmd.io/@hyonith/SJ0bUt-yQe" 
+            target="_blank" 
+            rel="noopener" 
+            class="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-sm font-medium transition-all flex items-center space-x-1.5"
+          >
+            <span>📝 HackMD 原站</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 主分頁標籤導航列 ==================== -->
+  <div class="sticky top-20 z-30 bg-custom-card border-b border-custom shadow-sm transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex space-x-1 sm:space-x-2 overflow-x-auto py-2.5 no-scrollbar" id="tabNav" aria-label="Tabs">
+        <!-- Tab 0: 總覽 -->
+        <button onclick="switchTab('overview')" data-tab="overview" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all flex items-center space-x-2 bg-blue-600 text-white shadow-sm">
+          <span>📋</span>
+          <span>提詞總覽與速查</span>
+          <span class="px-1.5 py-0.2 bg-white/20 text-xs rounded-full">11 則</span>
+        </button>
+
+        <!-- Tab 1: T01 -->
+        <button onclick="switchTab('t01')" data-tab="t01" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all flex items-center space-x-2 text-custom-muted hover:bg-custom-sub">
+          <span>📘</span>
+          <span>T01 課綱比較分析</span>
+        </button>
+
+        <!-- Tab 2: T02 -->
+        <button onclick="switchTab('t02')" data-tab="t02" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all flex items-center space-x-2 text-custom-muted hover:bg-custom-sub">
+          <span>📗</span>
+          <span>T02 教學計畫與健檢</span>
+        </button>
+
+        <!-- Tab 3: T03 -->
+        <button onclick="switchTab('t03')" data-tab="t03" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all flex items-center space-x-2 text-custom-muted hover:bg-custom-sub">
+          <span>📙</span>
+          <span>T03 講義精煉轉簡報</span>
+        </button>
+
+        <!-- Tab 4: T04 -->
+        <button onclick="switchTab('t04')" data-tab="t04" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all flex items-center space-x-2 text-custom-muted hover:bg-custom-sub">
+          <span>✉️</span>
+          <span>T04 Gmail 智慧收發排程</span>
+        </button>
+
+        <!-- Tab 5: T05 -->
+        <button onclick="switchTab('t05')" data-tab="t05" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all flex items-center space-x-2 text-custom-muted hover:bg-custom-sub">
+          <span>📊</span>
+          <span>T05 評量分析與試算表</span>
+        </button>
+
+        <!-- Tab 6: 互動提詞工作室 -->
+        <button onclick="switchTab('studio')" data-tab="studio" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all flex items-center space-x-2 text-custom-muted hover:bg-custom-sub">
+          <span>🛠️</span>
+          <span>提詞調試工作室</span>
+          <span class="px-1.5 py-0.5 text-[10px] bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300 font-bold rounded">互動</span>
+        </button>
+
+        <!-- Tab 7: 課程素材資源 -->
+        <button onclick="switchTab('resources')" data-tab="resources" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all flex items-center space-x-2 text-custom-muted hover:bg-custom-sub">
+          <span>📁</span>
+          <span>教材架構與延伸</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ==================== 主要內容區 (分頁面) ==================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- ==================== TAB 0: 總覽與快速篩選 ==================== -->
+    <div id="tab-overview" class="tab-content space-y-6">
+      
+      <!-- 搜尋與統計欄 -->
+      <div class="bg-custom-card p-6 rounded-2xl border border-custom shadow-sm">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h3 class="text-xl font-bold flex items-center space-x-2">
+              <span>🎯</span>
+              <span>課中提詞分類庫總覽</span>
+            </h3>
+            <p class="text-custom-muted text-sm mt-1">
+              李燕秋老師設計之「展示素材-教學」全流程提詞，包含 5 大模組共 11 則高階提詞。
+            </p>
+          </div>
+          <!-- 搜尋框 -->
+          <div class="relative w-full md:w-80">
+            <input 
+              type="text" 
+              id="promptSearchInput" 
+              oninput="filterPrompts()" 
+              placeholder="搜尋關鍵字 (如：簡報、Gmail、評分...)" 
+              class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-custom bg-custom-sub text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            />
+            <svg class="w-5 h-5 text-custom-muted absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- 模組快速跳轉標籤 -->
+        <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-custom">
+          <button onclick="quickFilterCategory('all', this)" class="cat-pill active px-3 py-1 rounded-lg text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/60 dark:text-blue-200">全部 (11)</button>
+          <button onclick="quickFilterCategory('T01', this)" class="cat-pill px-3 py-1 rounded-lg text-xs font-medium bg-custom-sub hover:bg-blue-50 dark:hover:bg-slate-800">T01 課綱比較 (2)</button>
+          <button onclick="quickFilterCategory('T02', this)" class="cat-pill px-3 py-1 rounded-lg text-xs font-medium bg-custom-sub hover:bg-blue-50 dark:hover:bg-slate-800">T02 教學計畫 (3)</button>
+          <button onclick="quickFilterCategory('T03', this)" class="cat-pill px-3 py-1 rounded-lg text-xs font-medium bg-custom-sub hover:bg-blue-50 dark:hover:bg-slate-800">T03 講義簡報 (3)</button>
+          <button onclick="quickFilterCategory('T04', this)" class="cat-pill px-3 py-1 rounded-lg text-xs font-medium bg-custom-sub hover:bg-blue-50 dark:hover:bg-slate-800">T04 郵件排程 (4)</button>
+          <button onclick="quickFilterCategory('T05', this)" class="cat-pill px-3 py-1 rounded-lg text-xs font-medium bg-custom-sub hover:bg-blue-50 dark:hover:bg-slate-800">T05 評量分析 (1)</button>
+        </div>
+      </div>
+
+      <!-- 提詞卡片網格 -->
+      <div id="promptsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- 動態渲染卡片 -->
+      </div>
+    </div>
+
+    <!-- ==================== TAB 1: T01 課綱比較分析 ==================== -->
+    <div id="tab-t01" class="tab-content hidden space-y-6">
+      <div class="bg-custom-card p-6 rounded-2xl border border-custom shadow-sm">
+        <div class="flex items-center justify-between border-b border-custom pb-4 mb-4">
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="px-2.5 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900/60 dark:text-blue-200 text-xs font-bold rounded-lg">單元模組 T01</span>
+              <span class="text-xs text-custom-muted font-medium">個體經濟學 • 跨校課綱橫向比對</span>
+            </div>
+            <h3 class="text-2xl font-bold mt-1">課程大綱比較分析與 Word 產出自動化</h3>
+          </div>
+          <button onclick="switchTab('studio'); populateStudio('t01_1')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition flex items-center space-x-1.5 shadow">
+            <span>帶入調試室</span>
+          </button>
+        </div>
+
+        <div class="prose max-w-none text-custom-muted text-sm leading-relaxed mb-6">
+          <p>
+            <strong>情境說明：</strong> 教師準備開設大二必修、120 人大班之《個體經濟學》，藉由 Gemini 連動雲端硬碟三份課綱，並透過聯網搜尋同類大綱，以表格化精準比對「課程目標、教科書、進度、評分、教學法」，最後匯出 Word 檔典藏。
+          </p>
+        </div>
+
+        <!-- 卡片 1 -->
+        <div class="prompt-box border rounded-2xl p-5 mb-6 relative group transition-all hover:shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-blue-600 dark:text-blue-400">提詞 01-1</span>
+              <span class="text-xs bg-custom-sub px-2 py-0.5 rounded text-custom-muted font-medium">多維度比對與設計建議</span>
+            </div>
+            <button onclick="copyText('prompt-t01-1', this)" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center space-x-1 shadow-sm transition">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+              <span>複製提詞</span>
+            </button>
+          </div>
+          <pre id="prompt-t01-1" class="font-mono text-sm p-4 bg-white dark:bg-slate-900 rounded-xl border border-custom overflow-x-auto whitespace-pre-wrap leading-relaxed">我正在準備開設《個體經濟學》(大二必修、3 學分、120 人大班)。請使用"展示素材-教學"資料夾中的三份課綱(T01_他校課綱_示範大學A_個體經濟學),並搜尋網路上公開的同類課程大綱,比較以下面向:課程目標、教科書、每週進度、評分方式、教學方法。請用表格呈現差異,最後列出可供我參考的設計建議,並標示每項資訊的來源。</pre>
+          <div class="mt-3 flex items-center text-xs text-custom-muted space-x-4">
+            <span>💡 <strong>技巧要點：</strong>明確定義班級人數、必選修屬性，要求表格化輸出並註記來源出處。</span>
+          </div>
+        </div>
+
+        <!-- 卡片 2 -->
+        <div class="prompt-box border rounded-2xl p-5 relative group transition-all hover:shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-blue-600 dark:text-blue-400">提詞 01-2</span>
+              <span class="text-xs bg-custom-sub px-2 py-0.5 rounded text-custom-muted font-medium">轉檔與雲端存放</span>
+            </div>
+            <button onclick="copyText('prompt-t01-2', this)" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center space-x-1 shadow-sm transition">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+              <span>複製提詞</span>
+            </button>
+          </div>
+          <pre id="prompt-t01-2" class="font-mono text-sm p-4 bg-white dark:bg-slate-900 rounded-xl border border-custom overflow-x-auto whitespace-pre-wrap leading-relaxed">將報告轉成WORD檔案,放回"展示素材-教學"中的"作品"資料夾.</pre>
+          <div class="mt-3 flex items-center text-xs text-custom-muted space-x-4">
+            <span>💡 <strong>技巧要點：</strong>指定 Google Workspace 工具自動建立 .docx 文件並儲存至特定目錄。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 2: T02 教學計畫與健檢 ==================== -->
+    <div id="tab-t02" class="tab-content hidden space-y-6">
+      <div class="bg-custom-card p-6 rounded-2xl border border-custom shadow-sm">
+        <div class="flex items-center justify-between border-b border-custom pb-4 mb-4">
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-200 text-xs font-bold rounded-lg">單元模組 T02</span>
+              <span class="text-xs text-custom-muted font-medium">18 週計畫表 • 核心能力矩陣 • AI 邏輯健檢</span>
+            </div>
+            <h3 class="text-2xl font-bold mt-1">教學計畫表自動建置、合規檢核與配分微調</h3>
+          </div>
+        </div>
+
+        <!-- 卡片 1 -->
+        <div class="prompt-box border rounded-2xl p-5 mb-6 relative group transition-all hover:shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-emerald-600 dark:text-emerald-400">提詞 02-1</span>
+              <span class="text-xs bg-custom-sub px-2 py-0.5 rounded text-custom-muted font-medium">18 週計畫表自動填寫</span>
+            </div>
+            <button onclick="copyText('prompt-t02-1', this)" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold flex items-center space-x-1 shadow-sm transition">
+              <span>複製提詞</span>
+            </button>
+          </div>
+          <pre id="prompt-t02-1" class="font-mono text-sm p-4 bg-white dark:bg-slate-900 rounded-xl border border-custom overflow-x-auto whitespace-pre-wrap leading-relaxed">資料在我的雲端硬碟 > 展示素材-教學 > TO2-教學計劃表
+請以『TO2_系所核心能力與課程地圖』和『TO2_課程基本資料與限制』為基礎,填寫TO2_教學計畫表範本。課程目標寫 3–4 項,每項標註對應的核心能力代號(C1–C4);週次進度表需包含 18 週(第 8 週期中考、第 18 週期末考),欄位為週次、主題、教學活動、對應核心能力。
+有資料就填入,沒有資料就留空</pre>
+        </div>
+
+        <!-- 卡片 2 -->
+        <div class="prompt-box border rounded-2xl p-5 mb-6 relative group transition-all hover:shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-emerald-600 dark:text-emerald-400">提詞 02-2</span>
+              <span class="text-xs bg-custom-sub px-2 py-0.5 rounded text-custom-muted font-medium">AI 邏輯健檢與評鑑一致性診斷</span>
+            </div>
+            <button onclick="copyText('prompt-t02-2', this)" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold flex items-center space-x-1 shadow-sm transition">
+              <span>複製提詞</span>
+            </button>
+          </div>
+          <pre id="prompt-t02-2" class="font-mono text-sm p-4 bg-white dark:bg-slate-900 rounded-xl border border-custom overflow-x-auto whitespace-pre-wrap leading-relaxed">請檢查這份教學計畫表:評分項目是否都有對應的核心能力?各週進度是否與課程目標一致?列出不一致之處。</pre>
+          <div class="mt-3 text-xs text-custom-muted">
+            💡 <strong>教育評鑑神器：</strong>由 AI 扮演嚴謹督學，自動檢核「課程目標 ↔ 每週進度 ↔ 評量項目 ↔ 核心能力代碼」之一致性，防範邏輯斷層。
+          </div>
+        </div>
+
+        <!-- 卡片 3 -->
+        <div class="prompt-box border rounded-2xl p-5 relative group transition-all hover:shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-emerald-600 dark:text-emerald-400">提詞 02-3</span>
+              <span class="text-xs bg-custom-sub px-2 py-0.5 rounded text-custom-muted font-medium">計分權重與課堂參與規則微調</span>
+            </div>
+            <button onclick="copyText('prompt-t02-3', this)" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold flex items-center space-x-1 shadow-sm transition">
+              <span>複製提詞</span>
+            </button>
+          </div>
+          <pre id="prompt-t02-3" class="font-mono text-sm p-4 bg-white dark:bg-slate-900 rounded-xl border border-custom overflow-x-auto whitespace-pre-wrap leading-relaxed">計分部份,將每周課堂討論參與,獨立出來,分數為5%.小組專與口頭報告為10%.
+課堂討論的的5%是以有討論的堂數來算平均</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: T03 講義精煉與簡報生成 ==================== -->
+    <div id="tab-t03" class="tab-content hidden space-y-6">
+      <div class="bg-custom-card p-6 rounded-2xl border border-custom shadow-sm">
+        <div class="flex items-center justify-between border-b border-custom pb-4 mb-4">
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="px-2.5 py-1 bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-200 text-xs font-bold rounded-lg">單元模組 T03</span>
+              <span class="text-xs text-custom-muted font-medium">長篇講義重組 • 8 頁極簡簡報 • 50 分鐘備忘稿</span>
+            </div>
+            <h3 class="text-2xl font-bold mt-1">講義精煉、投影片生成與講者備忘稿撰寫</h3>
+          </div>
+        </div>
+
+        <!-- 卡片 1 -->
+        <div class="prompt-box border rounded-2xl p-5 mb-6 relative group transition-all hover:shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-amber-600 dark:text-amber-400">提詞 03-1</span>
+              <span class="text-xs bg-custom-sub px-2 py-0.5 rounded text-custom-muted font-medium">講義精簡為 8 頁簡報與排版規範</span>
+            </div>
+            <button onclick="copyText('prompt-t03-1', this)" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-semibold flex items-center space-x-1 shadow-sm transition">
+              <span>複製提詞</span>
+            </button>
+          </div>
+          <pre id="prompt-t03-1" class="font-mono text-sm p-4 bg-white dark:bg-slate-900 rounded-xl border border-custom overflow-x-auto whitespace-pre-wrap leading-relaxed">請把這份講義重組成 8 張以內的課堂簡報:每張只保留一個重點,文字精簡(每張不超過 5 行);保留『便當』與『電影票』兩個例題的計算過程;把常見迷思合併成一張。
+簡報風格為對比色彩,簡報的標題字型尺寸為50PT,內文字型尺寸為20PT.
+若有數據資料,強化數據
+完成的簡報檔,轉成PPTX格式,儲存到我的雲端硬碟 > 展示素材-教學 > TO3-簡報
+若無資料,則自行建立資料夾</pre>
+          <div class="mt-3 text-xs text-custom-muted">
+            💡 <strong>視覺化排版秘訣：</strong>明定每頁單一重點（不超過5行）、指定標題 50PT 與內文 20PT、保留核心計算案例，產出專業高質感投影片。
+          </div>
+        </div>
+
+        <!-- 卡片 2 -->
+        <div class="prompt-box border rounded-2xl p-5 mb-6 relative group transition-all hover:shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-amber-600 dark:text-amber-400">提詞 03-2</span>
+              <span class="text-xs bg-custom-sub px-2 py-0.5 rounded text-custom-muted font-medium">雲端目錄建置與 PPTX 存檔</span>
+            </div>
+            <button onclick="copyText('prompt-t03-2', this)" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-semibold flex items-center space-x-1 shadow-sm transition">
+              <span>複製提詞</span>
+            </button>
+          </div>
+          <pre id="prompt-t03-2" class="font-mono text-sm p-4 bg-white dark:bg-slate-900 rounded-xl border border-custom overflow-x-auto whitespace-pre-wrap leading-relaxed">在我的雲端硬碟 > 展示素材-教學 建立新資料夾,名為"T03-簡報"
+將簡報儲存到資料夾中,轉檔為PPTX</pre>
+        </div>
+
+        <!-- 卡片 3 -->
+        <div class="prompt-box border rounded-2xl p-5 relative group transition-all hover:shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-amber-600 dark:text-amber-400">提詞 03-3</span>
+              <span class="text-xs bg-custom-sub px-2 py-0.5 rounded text-custom-muted font-medium">50 分鐘時長講者備忘稿 (Speaker Notes)</span>
+            </div>
+            <button onclick="copyText('prompt-t03-3', this)" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-semibold flex items-center space-x-1 shadow-sm transition">
+              <span>複製提詞</span>
+            </button>
+          </div>
+          <pre id="prompt-t03-3" class="font-mono text-sm p-4 bg-white dark:bg-slate-900 rounded-xl border border-custom overflow-x-auto whitespace-pre-wrap leading-relaxed">請為每張投影片加上講者備忘稿,包含建議講解時間,全部約 50 分鐘。</pre>
+          <div class="mt-3 text-xs text-custom-muted">
+            💡 <strong>掌控課堂節奏：</strong>直接將 50 分鐘按投影片張數分配解說時長，包含提問互動引導語，教師授課從容不迫！
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4: T04 Gmail 智慧收發與排程 ==================== -->
+    <div id="tab-t04" class="tab-content hidden space-y-6">
+      <div class="bg-custom-card p-6 rounded-2xl border border-custom shadow-sm">
+        <div class="flex items-center justify-between border-b border-custom pb-4 mb-4">
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="px-2.5 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900/60 dark:text-purple-200 text-xs font-bold rounded-lg">單元模組 T04</span>
+              <span class="text-xs text-custom-muted font-medium">Gmail 智慧秘書 • 自動分類 • 國定假日排程 • 防呆刪信</span>
+            </div>
+            <h3 class="text-2xl font-bold mt-1">智慧郵件管理、人機協同刪信與自動化排程</h3>
+          </div>
+        </div>
+
+        <!-- 卡片 1 -->
+        <div class="prompt-box border rounded-2xl p-5 mb-6 relative group transition-all hover:shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-purple-600 dark:text-purple-400">提詞 04-1</span>
+              <span class="text-xs bg-custom-sub px-2 py-0.5 rounded text-custom-muted font-medium">未讀信件三層分類與逾期提醒</span>
+            </div>
+            <button onclick="copyText('prompt-t04-1', this)" class="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-xs font-semibold flex items-center space-x-1 shadow-sm transition">
+              <span>複製提詞</span>
+            </button>
+          </div>
+          <pre id="prompt-t04-1" class="font-mono text-sm p-4 bg-white dark:bg-slate-900 rounded-xl border border-custom overflow-x-auto whitespace-pre-wrap leading-relaxed">讀取信箱,整理未讀信件,先進行分類
+1.廣告信,列出標題
+2.帳單催繳,要列出標題以及截止日期
+3.工作相關,列出標題以及摘要,若有需要回覆,也列出時間
+
+另外,若有已讀取,但需要回信而未回信,則要提醒以及列出截止日期</pre>
+        </div>
+
+        <!-- 卡片 2 -->
+        <div class="prompt-box border rounded-2xl p-5 mb-6 relative group transition-all hover:shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-purple-600 dark:text-purple-400">提詞 04-2</span>
+              <span class="text-xs bg-custom-sub px-2 py-0.5 rounded text-custom-muted font-medium">平日自動定時排程（跳過國定假日）</span>
+            </div>
+            <button onclick="copyText('prompt-t04-2', this)" class="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-xs font-semibold flex items-center space-x-1 shadow-sm transition">
+              <span>複製提詞</span>
+            </button>
+          </div>
+          <pre id="prompt-t04-2" class="font-mono text-sm p-4 bg-white dark:bg-slate-900 rounded-xl border border-custom overflow-x-auto whitespace-pre-wrap leading-relaxed">設定排程,每周一到周五,的中午十二點,以及下午四點半.執行.
+若為國定假日,則不需要執行</pre>
+        </div>
+
+        <!-- 卡片 3 -->
+        <div class="prompt-box border rounded-2xl p-5 mb-6 relative group transition-all hover:shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-purple-600 dark:text-purple-400">提詞 04-3</span>
+              <span class="text-xs bg-custom-sub px-2 py-0.5 rounded text-custom-muted font-medium">人機協同防呆廣告信批次刪除</span>
+            </div>
+            <button onclick="copyText('prompt-t04-3', this)" class="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-xs font-semibold flex items-center space-x-1 shadow-sm transition">
+              <span>複製提詞</span>
+            </button>
+          </div>
+          <pre id="prompt-t04-3" class="font-mono text-sm p-4 bg-white dark:bg-slate-900 rounded-xl border border-custom overflow-x-auto whitespace-pre-wrap leading-relaxed">列出廣告信,再刪除.流程是先列出五封廣告信,要標上序號.問我可以刪除哪幾封,當我回覆後,再刪除</pre>
+          <div class="mt-3 text-xs text-custom-muted">
+            💡 <strong>AI 安全操作規範：</strong>落實「Human-in-the-loop 人在迴圈」防呆機制，避免 AI 誤刪重要公務郵件。
+          </div>
+        </div>
+
+        <!-- 卡片 4 -->
+        <div class="prompt-box border rounded-2xl p-5 relative group transition-all hover:shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-purple-600 dark:text-purple-400">提詞 04-4</span>
+              <span class="text-xs bg-custom-sub px-2 py-0.5 rounded text-custom-muted font-medium">訂閱郵件掃描與退訂彙整報告</span>
+            </div>
+            <button onclick="copyText('prompt-t04-4', this)" class="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-xs font-semibold flex items-center space-x-1 shadow-sm transition">
+              <span>複製提詞</span>
+            </button>
+          </div>
+          <pre id="prompt-t04-4" class="font-mono text-sm p-4 bg-white dark:bg-slate-900 rounded-xl border border-custom overflow-x-auto whitespace-pre-wrap leading-relaxed">設定每週排程，在 Gmail 搜尋我訂閱的電子郵件，並彙整成一份報告，方便我取消訂閱。一開始請先詢問我想取消訂閱哪些內容，以及偏好的傳送方式 (例如即時通訊或電子郵件)。</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 5: T05 評量分析與試算表 ==================== -->
+    <div id="tab-t05" class="tab-content hidden space-y-6">
+      <div class="bg-custom-card p-6 rounded-2xl border border-custom shadow-sm">
+        <div class="flex items-center justify-between border-b border-custom pb-4 mb-4">
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="px-2.5 py-1 bg-rose-100 text-rose-800 dark:bg-rose-900/60 dark:text-rose-200 text-xs font-bold rounded-lg">單元模組 T05</span>
+              <span class="text-xs text-custom-muted font-medium">期中考分析 • 單元題型答對率 • 易錯迷思歸納</span>
+            </div>
+            <h3 class="text-2xl font-bold mt-1">學生成績評量深度分析與試算表自動化</h3>
+          </div>
+        </div>
+
+        <div class="prompt-box border rounded-2xl p-5 relative group transition-all hover:shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-rose-600 dark:text-rose-400">提詞 05-1</span>
+              <span class="text-xs bg-custom-sub px-2 py-0.5 rounded text-custom-muted font-medium">多維度答對率分析、排序長條圖與低分迷思共同點</span>
+            </div>
+            <button onclick="copyText('prompt-t05-1', this)" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-semibold flex items-center space-x-1 shadow-sm transition">
+              <span>複製提詞</span>
+            </button>
+          </div>
+          <pre id="prompt-t05-1" class="font-mono text-sm p-4 bg-white dark:bg-slate-900 rounded-xl border border-custom overflow-x-auto whitespace-pre-wrap leading-relaxed">請計算每一題的答對率,再依『題目表』的單元與題型,分別計算各單元、各題型的平均答對率,用長條圖由低到高排序。再找出答對率低於 50% 的題目,說明它們有哪些共同點。
+完成的報表,要另存一個新的試算表
+放回我的雲端硬碟 > 展示素材-教學 > TO5-期中報告</pre>
+          <div class="mt-4 pt-3 border-t border-custom flex flex-col sm:flex-row gap-3 text-xs text-custom-muted">
+            <div class="flex-1 bg-white dark:bg-slate-900 p-3 rounded-lg border border-custom">
+              <span class="font-bold text-slate-800 dark:text-slate-200">📊 輸出 1：雙向交叉統計</span>
+              <p class="mt-1">各單元 × 題型的答對率矩陣，自動產出直觀長條圖，弱點單元一目了然。</p>
+            </div>
+            <div class="flex-1 bg-white dark:bg-slate-900 p-3 rounded-lg border border-custom">
+              <span class="font-bold text-slate-800 dark:text-slate-200">🔍 輸出 2：教學迷思洞察</span>
+              <p class="mt-1">篩選 &lt; 50% 題目歸納核心盲點，做為期中補救教學與考卷檢討之直接指引。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 6: 互動提示詞調試工作室 (STUDIO) ==================== -->
+    <div id="tab-studio" class="tab-content hidden space-y-6">
+      <div class="bg-custom-card p-6 rounded-2xl border border-custom shadow-sm">
+        <div class="border-b border-custom pb-4 mb-6">
+          <div class="flex items-center space-x-2">
+            <span class="px-2.5 py-1 bg-indigo-100 text-indigo-800 dark:bg-indigo-900/60 dark:text-indigo-200 text-xs font-bold rounded-lg">專屬備課工具</span>
+            <span class="text-xs text-custom-muted font-medium">自訂參數 • 即時預覽 • 一鍵複製</span>
+          </div>
+          <h3 class="text-2xl font-bold mt-1">互動提示詞調試工作室 (Prompt Playground)</h3>
+          <p class="text-custom-muted text-sm mt-1">
+            老師可在此將研習中的範例參數（如學科、年級、班級人數、週次）替換為您任教學科的實際數值，立即組合成專屬 Prompt！
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- 左側：參數表單 -->
+          <div class="lg:col-span-5 space-y-4 bg-custom-sub p-5 rounded-2xl border border-custom">
+            <h4 class="font-bold text-sm text-custom-muted uppercase tracking-wider">自訂教學情境變數</h4>
+
+            <div>
+              <label class="block text-xs font-bold mb-1">任教學科與課程名稱</label>
+              <input type="text" id="stu-course" value="高中資訊科技" class="w-full px-3 py-2 rounded-xl border border-custom bg-custom-card text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" oninput="updateStudioPrompt()">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold mb-1">修課對象與班級規模</label>
+                <input type="text" id="stu-target" value="高一必修、35人班級" class="w-full px-3 py-2 rounded-xl border border-custom bg-custom-card text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" oninput="updateStudioPrompt()">
+              </div>
+              <div>
+                <label class="block text-xs font-bold mb-1">學分數與每週節數</label>
+                <input type="text" id="stu-credits" value="2學分、每週2節" class="w-full px-3 py-2 rounded-xl border border-custom bg-custom-card text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" oninput="updateStudioPrompt()">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold mb-1">雲端素材資料夾名稱</label>
+              <input type="text" id="stu-folder" value="展示素材-資訊科技" class="w-full px-3 py-2 rounded-xl border border-custom bg-custom-card text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" oninput="updateStudioPrompt()">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold mb-1">期中評量週次</label>
+                <input type="text" id="stu-midterm" value="第 8 週" class="w-full px-3 py-2 rounded-xl border border-custom bg-custom-card text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" oninput="updateStudioPrompt()">
+              </div>
+              <div>
+                <label class="block text-xs font-bold mb-1">總授課週數</label>
+                <input type="text" id="stu-totalweeks" value="18 週" class="w-full px-3 py-2 rounded-xl border border-custom bg-custom-card text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" oninput="updateStudioPrompt()">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold mb-1">簡報重點限制與字型</label>
+              <input type="text" id="stu-slidespec" value="8張以內、標題50PT、內文20PT" class="w-full px-3 py-2 rounded-xl border border-custom bg-custom-card text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" oninput="updateStudioPrompt()">
+            </div>
+
+            <!-- 範本快選 -->
+            <div class="pt-3 border-t border-custom">
+              <span class="text-xs font-bold text-custom-muted block mb-2">快速載入研習範例：</span>
+              <div class="flex flex-wrap gap-1.5">
+                <button onclick="loadStudioPreset('t01')" class="px-2.5 py-1 text-xs bg-custom-card border border-custom rounded-lg hover:border-blue-500">個體經濟學 (T01)</button>
+                <button onclick="loadStudioPreset('math')" class="px-2.5 py-1 text-xs bg-custom-card border border-custom rounded-lg hover:border-blue-500">國中數學</button>
+                <button onclick="loadStudioPreset('bio')" class="px-2.5 py-1 text-xs bg-custom-card border border-custom rounded-lg hover:border-blue-500">自然生物</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 右側：即時合成預覽 -->
+          <div class="lg:col-span-7 flex flex-col">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-custom-muted uppercase tracking-wider">即時生成專屬提示詞 (動態組配)</span>
+              <button onclick="copyText('studioOutputText', this)" class="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold flex items-center space-x-1 shadow transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                <span>複製專屬提示詞</span>
+              </button>
+            </div>
+            <textarea 
+              id="studioOutputText" 
+              rows="15" 
+              class="w-full flex-1 p-4 rounded-2xl border border-custom bg-white dark:bg-slate-900 font-mono text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+            ></textarea>
+            <div class="mt-2 text-xs text-custom-muted flex items-center justify-between">
+              <span>貼入 Gemini 對話框即可直接使用</span>
+              <span id="charCount" class="font-mono">字數統計: 0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 7: 課程素材資源與講師簡介 ==================== -->
+    <div id="tab-resources" class="tab-content hidden space-y-6">
+      
+      <!-- 雲端硬碟檔案清單解析 -->
+      <div class="bg-custom-card p-6 rounded-2xl border border-custom shadow-sm">
+        <h3 class="text-xl font-bold flex items-center space-x-2 mb-2">
+          <span>📂</span>
+          <span>Google Drive 雲端素材目錄完整結構</span>
+        </h3>
+        <p class="text-custom-muted text-sm mb-6">
+          李燕秋老師於雲端硬碟共享之「展示素材-教學」結構，對應各單元實作練習：
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- T01 -->
+          <div class="bg-custom-sub p-4 rounded-xl border border-custom">
+            <div class="flex items-center space-x-2 text-blue-600 font-bold text-sm mb-2">
+              <span>📁 T01-課程大綱比較</span>
+            </div>
+            <ul class="text-xs space-y-1.5 text-custom-muted">
+              <li>• T01_他校課綱_示範大學A_個體經濟學</li>
+              <li>• 建議作品儲存路徑：/展示素材-教學/作品/</li>
+            </ul>
+          </div>
+
+          <!-- T02 -->
+          <div class="bg-custom-sub p-4 rounded-xl border border-custom">
+            <div class="flex items-center space-x-2 text-emerald-600 font-bold text-sm mb-2">
+              <span>📁 T02-教學計劃表</span>
+            </div>
+            <ul class="text-xs space-y-1.5 text-custom-muted">
+              <li>• TO2_系所核心能力與課程地圖</li>
+              <li>• TO2_課程基本資料與限制</li>
+              <li>• TO2_教學計畫表範本</li>
+            </ul>
+          </div>
+
+          <!-- T03 -->
+          <div class="bg-custom-sub p-4 rounded-xl border border-custom">
+            <div class="flex items-center space-x-2 text-amber-600 font-bold text-sm mb-2">
+              <span>📁 T03-簡報</span>
+            </div>
+            <ul class="text-xs space-y-1.5 text-custom-muted">
+              <li>• T03_第3週彈性_長版講義 (Google Slides)</li>
+              <li>• 便當與電影票核心案例精萃</li>
+            </ul>
+          </div>
+
+          <!-- T04 -->
+          <div class="bg-custom-sub p-4 rounded-xl border border-custom">
+            <div class="flex items-center space-x-2 text-purple-600 font-bold text-sm mb-2">
+              <span>📁 T04-備用測驗題庫</span>
+            </div>
+            <ul class="text-xs space-y-1.5 text-custom-muted">
+              <li>• T04_備用測驗題庫_彈性 (Google Docs)</li>
+              <li>• T04_第3週彈性_教學目標與重點</li>
+            </ul>
+          </div>
+
+          <!-- T05 -->
+          <div class="bg-custom-sub p-4 rounded-xl border border-custom">
+            <div class="flex items-center space-x-2 text-rose-600 font-bold text-sm mb-2">
+              <span>📁 T05-期中報告</span>
+            </div>
+            <ul class="text-xs space-y-1.5 text-custom-muted">
+              <li>• T05_期中考成績表 (Google Sheets)</li>
+              <li>• 題目表、各單元題型答對率報表</li>
+            </ul>
+          </div>
+
+          <!-- T06 -->
+          <div class="bg-custom-sub p-4 rounded-xl border border-custom">
+            <div class="flex items-center space-x-2 text-slate-600 dark:text-slate-300 font-bold text-sm mb-2">
+              <span>📁 T06-會議與專案追蹤</span>
+            </div>
+            <ul class="text-xs space-y-1.5 text-custom-muted">
+              <li>• T06_會議記錄_Teams段落版</li>
+              <li>• T06_專題追蹤表_上次會議 (Sheets)</li>
+              <li>• T06_專題會議逐字稿_10月23日</li>
+              <li>• T06_錄影前準備與演練說明</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-blue-50 dark:bg-blue-950/40 rounded-xl border border-blue-200 dark:border-blue-900/50 flex items-center justify-between">
+          <div class="text-xs text-blue-800 dark:text-blue-300">
+            <strong>雲端連結：</strong>包含全套實戰練習範本檔案，點擊右方按鈕可直接開啟瀏覽。
+          </div>
+          <a 
+            href="https://drive.google.com/drive/folders/1WoHRE3nmrIHPghEgaPfnzLA6O--dSVWE?usp=sharing" 
+            target="_blank" 
+            rel="noopener" 
+            class="px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-bold hover:bg-blue-700 transition"
+          >
+            開啟共享雲端硬碟 ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- 講師介紹卡片 -->
+      <div class="bg-custom-card p-6 rounded-2xl border border-custom shadow-sm">
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+          <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-amber-500 to-rose-500 text-white flex items-center justify-center font-bold text-3xl shadow-lg flex-shrink-0">
+            秋
+          </div>
+          <div class="flex-1 text-center sm:text-left">
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
+              <h4 class="text-xl font-bold">李燕秋 老師 (Hyonith)</h4>
+              <span class="px-2 py-0.5 text-xs bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-200 rounded font-semibold">講師專頁</span>
+            </div>
+            <p class="text-custom-muted text-sm leading-relaxed mb-4">
+              資訊融入教學專家、微軟最有價值專家 (MVP)、Google 認證講師。長期致力於將生成式 AI、Google Workspace 與智慧辦公備課工具深度導入各級學校教學現場。
+            </p>
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3">
+              <a 
+                href="https://www.facebook.com/Hyonith2014/?ref=hl" 
+                target="_blank" 
+                rel="noopener" 
+                class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold flex items-center space-x-1.5 transition shadow"
+              >
+                <span>👍 Facebook 粉絲專頁</span>
+              </a>
+              <a 
+                href="https://www.youtube.com/channel/UC8LZYIbGBOhTApJ09y9ldnQ" 
+                target="_blank" 
+                rel="noopener" 
+                class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold flex items-center space-x-1.5 transition shadow"
+              >
+                <span>📺 YouTube 教學頻道</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ==================== 頁尾 (Footer) ==================== -->
+  <footer class="mt-auto border-t border-custom bg-custom-card py-6 text-center text-xs text-custom-muted transition-colors">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div>
+        <span>20261124 慈大附中 Gemini Spark 智慧教學研習</span>
+        <span class="mx-2">•</span>
+        <span>課程講師：李燕秋老師</span>
+      </div>
+      <div>
+        <span>安全防護：Web Crypto SHA-256 驗證</span>
+        <span class="mx-2">•</span>
+        <span>純前端離線相容架構</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== 複製成功提示 (Toast Notification) ==================== -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 border border-slate-700">
+      <div class="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center text-white text-xs font-bold">✓</div>
+      <span id="toastMsg" class="text-sm font-medium">提詞已成功複製到剪貼簿！</span>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT 邏輯腳本 ==================== -->
+  <script>
+    // 11 則完整提詞資料庫結構化
+    const PROMPT_DATABASE = [
+      {
+        id: "t01_1",
+        cat: "T01",
+        catName: "T01 課綱比較",
+        badgeColor: "blue",
+        title: "跨校課綱橫向比對與設計建議",
+        tag: "大二個體經濟學 • 120人班",
+        desc: "運用 Google 雲端示範大學課綱與網路公開大綱，橫向比對目標、教科書、進度、評分與教學法，以表格呈現並標示資訊來源。",
+        content: `我正在準備開設《個體經濟學》(大二必修、3 學分、120 人大班)。請使用"展示素材-教學"資料夾中的三份課綱(T01_他校課綱_示範大學A_個體經濟學),並搜尋網路上公開的同類課程大綱,比較以下面向:課程目標、教科書、每週進度、評分方式、教學方法。請用表格呈現差異,最後列出可供我參考的設計建議,並標示每項資訊的來源。`
+      },
+      {
+        id: "t01_2",
+        cat: "T01",
+        catName: "T01 課綱比較",
+        badgeColor: "blue",
+        title: "將報告轉檔 Word 儲存回雲端資料夾",
+        tag: "雲端自動化存檔",
+        desc: "指示 Gemini 將分析好的課綱比較建議轉為標準 Word (.docx) 文件，自動存回雲端「作品」資料夾。",
+        content: `將報告轉成WORD檔案,放回"展示素材-教學"中的"作品"資料夾.`
+      },
+      {
+        id: "t02_1",
+        cat: "T02",
+        catName: "T02 教學計畫",
+        badgeColor: "emerald",
+        title: "18 週教學計畫表自動建置",
+        tag: "核心能力矩陣 • C1-C4",
+        desc: "以系所核心能力與課程限制為依據，填寫 18 週進度表（含第 8 週期中、第 18 週期末考），標註對應代號。",
+        content: `資料在我的雲端硬碟 > 展示素材-教學 > TO2-教學計劃表
+請以『TO2_系所核心能力與課程地圖』和『TO2_課程基本資料與限制』為基礎,填寫TO2_教學計畫表範本。課程目標寫 3–4 項,每項標註對應的核心能力代號(C1–C4);週次進度表需包含 18 週(第 8 週期中考、第 18 週期末考),欄位為週次、主題、教學活動、對應核心能力。
+有資料就填入,沒有資料就留空`
+      },
+      {
+        id: "t02_2",
+        cat: "T02",
+        catName: "T02 教學計畫",
+        badgeColor: "emerald",
+        title: "教學計畫表評鑑一致性 AI 健檢",
+        tag: "防呆檢核 • 邏輯稽核",
+        desc: "檢查評分項目是否具備核心能力對應、各週進度是否與課程目標吻合，條列不一致之處。",
+        content: `請檢查這份教學計畫表:評分項目是否都有對應的核心能力?各週進度是否與課程目標一致?列出不一致之處。`
+      },
+      {
+        id: "t02_3",
+        cat: "T02",
+        catName: "T02 教學計畫",
+        badgeColor: "emerald",
+        title: "課堂討論參與計分權重微調",
+        tag: "評量比重 • 平均計算法",
+        desc: "獨立課堂討論佔 5%、小組專題口頭報告 10%，並依有討論堂數動態算平均。",
+        content: `計分部份,將每周課堂討論參與,獨立出來,分數為5%.小組專與口頭報告為10%.
+課堂討論的的5%是以有討論的堂數來算平均`
+      },
+      {
+        id: "t03_1",
+        cat: "T03",
+        catName: "T03 講義簡報",
+        badgeColor: "amber",
+        title: "長版講義重組為 8 頁對比色彩投影片",
+        tag: "每頁單重點 • 標題50PT內文20PT",
+        desc: "每張只保留一個重點（不超過5行），保留便當與電影票例題計算，迷思整併為一張，並強化數據呈現。",
+        content: `請把這份講義重組成 8 張以內的課堂簡報:每張只保留一個重點,文字精簡(每張不超過 5 行);保留『便當』與『電影票』兩個例題的計算過程;把常見迷思合併成一張。
+簡報風格為對比色彩,簡報的標題字型尺寸為50PT,內文字型尺寸為20PT.
+若有數據資料,強化數據
+完成的簡報檔,轉成PPTX格式,儲存到我的雲端硬碟 > 展示素材-教學 > TO3-簡報
+若無資料,則自行建立資料夾`
+      },
+      {
+        id: "t03_2",
+        cat: "T03",
+        catName: "T03 講義簡報",
+        badgeColor: "amber",
+        title: "建立雲端資料夾並轉存 PPTX",
+        tag: "Google Drive 自動建夾",
+        desc: "在展示素材-教學中自動建立「T03-簡報」資料夾，將產出之簡報轉為 PPTX 存檔。",
+        content: `在我的雲端硬碟 > 展示素材-教學 建立新資料夾,名為"T03-簡報"
+將簡報儲存到資料夾中,轉檔為PPTX`
+      },
+      {
+        id: "t03_3",
+        cat: "T03",
+        catName: "T03 講義簡報",
+        badgeColor: "amber",
+        title: "為每張投影片生成 50 分鐘講者備忘稿",
+        tag: "Speaker Notes • 授課節奏",
+        desc: "自動產生口頭講解稿與每頁建議講解時間，全部合計約 50 分鐘標準課堂。",
+        content: `請為每張投影片加上講者備忘稿,包含建議講解時間,全部約 50 分鐘。`
+      },
+      {
+        id: "t04_1",
+        cat: "T04",
+        catName: "T04 郵件排程",
+        badgeColor: "purple",
+        title: "Gmail 未讀信件三層分類與逾期提醒",
+        tag: "廣告信 • 催繳帳單 • 工作摘要",
+        desc: "讀取信箱整理未讀信件，並針對已讀但待回覆之信件標記截止日期主動提醒。",
+        content: `讀取信箱,整理未讀信件,先進行分類
+1.廣告信,列出標題
+2.帳單催繳,要列出標題以及截止日期
+3.工作相關,列出標題以及摘要,若有需要回覆,也列出時間
+
+另外,若有已讀取,但需要回信而未回信,則要提醒以及列出截止日期`
+      },
+      {
+        id: "t04_2",
+        cat: "T04",
+        catName: "T04 郵件排程",
+        badgeColor: "purple",
+        title: "平日定時排程（遇國定假日跳過）",
+        tag: "自動化工作流 • 12:00 & 16:30",
+        desc: "設定每週一至週五固定於 12:00 及 16:30 執行，國定假日自動暫停避開休假。",
+        content: `設定排程,每周一到周五,的中午十二點,以及下午四點半.執行.
+若為國定假日,則不需要執行`
+      },
+      {
+        id: "t04_3",
+        cat: "T04",
+        catName: "T04 郵件排程",
+        badgeColor: "purple",
+        title: "人機協同防呆廣告信批次刪除",
+        tag: "Human-in-the-loop • 序號核對",
+        desc: "先列出 5 封廣告信標上序號，主動詢問使用者可刪除哪幾封，獲得確認指令後再精準執行刪除。",
+        content: `列出廣告信,再刪除.流程是先列出五封廣告信,要標上序號.問我可以刪除哪幾封,當我回覆後,再刪除`
+      },
+      {
+        id: "t04_4",
+        cat: "T04",
+        catName: "T04 郵件排程",
+        badgeColor: "purple",
+        title: "訂閱郵件每週掃描與退訂彙整報告",
+        tag: "訂閱清理 • 偏好調查",
+        desc: "搜尋所有訂閱信件並彙整報告，詢問取消意願與喜好傳送方式（即時通訊或 Email）。",
+        content: `設定每週排程，在 Gmail 搜尋我訂閱的電子郵件，並彙整成一份報告，方便我取消訂閱。一開始請先詢問我想取消訂閱哪些內容，以及偏好的傳送方式 (例如即時通訊或電子郵件)。`
+      },
+      {
+        id: "t05_1",
+        cat: "T05",
+        catName: "T05 評量分析",
+        badgeColor: "rose",
+        title: "各題答對率計算、排序長條圖與盲點歸納",
+        tag: "長條圖排序 • <50%共同點診斷",
+        desc: "計算各題目答對率，依單元題型統計並以長條圖升序排序，診斷答對率未達 50% 之學生迷思，存為新試算表。",
+        content: `請計算每一題的答對率,再依『題目表』的單元與題型,分別計算各單元、各題型的平均答對率,用長條圖由低到高排序。再找出答對率低於 50% 的題目,說明它們有哪些共同點。
+完成的報表,要另存一個新的試算表
+放回我的雲端硬碟 > 展示素材-教學 > TO5-期中報告`
+      }
+    ];
+
+    // ==================== 門禁防護 (SHA-256 Web Crypto) ====================
+    // 嚴格遵守安全性規範：雜湊比對，前端不出現明文
+    const TARGET_AUTH_HASH = "5cae49b1fea5b5b969cdc931b8338968940c92309aa2339360cdd5c77be4a4ff";
+    const AUTH_STORAGE_KEY = "gemini_spark_edu_auth_v1";
+
+    async function computeSHA256(str) {
+      const buffer = new TextEncoder().encode(str);
+      const digest = await crypto.subtle.digest("SHA-256", buffer);
+      return Array.from(new Uint8Array(digest))
+        .map(b => b.toString(16).padStart(2, "0"))
+        .join("");
+    }
+
+    async function handleAuthSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById("accessKeyInput").value.trim();
+      const errorMsg = document.getElementById("authErrorMsg");
+      
+      const hash = await computeSHA256(input);
+      if (hash === TARGET_AUTH_HASH) {
+        localStorage.setItem(AUTH_STORAGE_KEY, "authenticated");
+        document.getElementById("authModal").classList.add("hidden");
+        errorMsg.classList.add("hidden");
+        showToast("研習手冊解鎖成功，歡迎使用！");
+      } else {
+        errorMsg.classList.remove("hidden");
+        document.getElementById("accessKeyInput").value = "";
+        document.getElementById("accessKeyInput").focus();
+      }
+    }
+
+    function checkAuthStatus() {
+      const isAuthed = localStorage.getItem(AUTH_STORAGE_KEY) === "authenticated";
+      const modal = document.getElementById("authModal");
+      if (isAuthed) {
+        modal.classList.add("hidden");
+      } else {
+        modal.classList.remove("hidden");
+      }
+    }
+
+    function relockSite() {
+      localStorage.removeItem(AUTH_STORAGE_KEY);
+      document.getElementById("accessKeyInput").value = "";
+      document.getElementById("authErrorMsg").classList.add("hidden");
+      document.getElementById("authModal").classList.remove("hidden");
+      showToast("手冊已安全重新上鎖");
+    }
+
+    // ==================== 字級調整 (中、大、特大) ====================
+    function setFontSize(size) {
+      const html = document.documentElement;
+      html.classList.remove("font-md", "font-lg", "font-xl");
+      html.classList.add(`font-${size}`);
+      localStorage.setItem("gemini_font_size", size);
+      updateFontUI(size);
+    }
+
+    function updateFontUI(size) {
+      ["md", "lg", "xl"].forEach(s => {
+        const btn = document.getElementById(`btn-font-${s}`);
+        if (btn) {
+          if (s === size) {
+            btn.className = "px-2.5 py-1 rounded-lg transition-colors font-bold bg-blue-600 text-white shadow-sm";
+          } else {
+            btn.className = "px-2.5 py-1 rounded-lg transition-colors font-semibold text-custom-muted hover:bg-slate-200 dark:hover:bg-slate-700";
+          }
+        }
+      });
+    }
+
+    // ==================== 布景主題切換 (淺、深、綠、藍) ====================
+    function setTheme(theme) {
+      const html = document.documentElement;
+      html.classList.remove("theme-light", "theme-dark", "theme-green", "theme-blue", "dark");
+      html.classList.add(`theme-${theme}`);
+      if (theme === "dark") {
+        html.classList.add("dark");
+      }
+      localStorage.setItem("gemini_theme", theme);
+      updateThemeUI(theme);
+    }
+
+    function updateThemeUI(theme) {
+      ["light", "dark", "green", "blue"].forEach(t => {
+        const btn = document.getElementById(`btn-theme-${t}`);
+        if (btn) {
+          if (t === theme) {
+            btn.className = "px-2.5 py-1 rounded-lg transition-colors font-bold bg-blue-600 text-white shadow-sm";
+          } else {
+            btn.className = "px-2.5 py-1 rounded-lg transition-colors font-medium text-custom-muted hover:bg-slate-200 dark:hover:bg-slate-700";
+          }
+        }
+      });
+    }
+
+    // ==================== 分頁切換 ====================
+    function switchTab(tabId) {
+      // 隱藏所有 tab 內容
+      document.querySelectorAll(".tab-content").forEach(el => el.classList.add("hidden"));
+      // 顯示目標 tab
+      const target = document.getElementById(`tab-${tabId}`);
+      if (target) target.classList.remove("hidden");
+
+      // 更新 Tab 按鈕外觀
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        const btnTab = btn.getAttribute("data-tab");
+        if (btnTab === tabId) {
+          btn.className = "tab-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all flex items-center space-x-2 bg-blue-600 text-white shadow-sm";
+        } else {
+          btn.className = "tab-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all flex items-center space-x-2 text-custom-muted hover:bg-custom-sub";
+        }
+      });
+
+      // 特殊動作：切換到工作室時更新字數
+      if (tabId === "studio") {
+        updateStudioPrompt();
+      }
+    }
+
+    // ==================== 提詞總覽網格渲染 ====================
+    function renderPromptsGrid(prompts) {
+      const container = document.getElementById("promptsGrid");
+      if (!container) return;
+
+      if (prompts.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center text-custom-muted">
+            <div class="text-4xl mb-2">🔍</div>
+            <p>查無符合關鍵字的提詞，請嘗試其他字詞或切換類別。</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = prompts.map(item => {
+        const badgeColors = {
+          blue: "bg-blue-100 text-blue-800 dark:bg-blue-900/60 dark:text-blue-200",
+          emerald: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-200",
+          amber: "bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-200",
+          purple: "bg-purple-100 text-purple-800 dark:bg-purple-900/60 dark:text-purple-200",
+          rose: "bg-rose-100 text-rose-800 dark:bg-rose-900/60 dark:text-rose-200",
+        };
+        const colorClass = badgeColors[item.badgeColor] || badgeColors.blue;
+
+        return `
+          <div class="bg-custom-card rounded-2xl border border-custom p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-2.5 py-0.5 rounded-md text-xs font-bold ${colorClass}">${item.catName}</span>
+                <span class="text-xs text-custom-muted font-mono">${item.tag}</span>
+              </div>
+              <h4 class="text-lg font-bold mb-2">${item.title}</h4>
+              <p class="text-xs text-custom-muted leading-relaxed mb-4">${item.desc}</p>
+              
+              <div class="prompt-box border rounded-xl p-3 text-xs font-mono relative bg-slate-50 dark:bg-slate-900/70 mb-4 max-h-36 overflow-y-auto whitespace-pre-wrap">
+                ${escapeHtml(item.content)}
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-3 border-t border-custom">
+              <button onclick="populateStudio('${item.id}'); switchTab('studio')" class="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center space-x-1">
+                <span>帶入工作室調試 ↗</span>
+              </button>
+              <button onclick="copyContentDirectly('${item.id}', this)" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center space-x-1 shadow-sm transition">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                <span>複製提詞</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    let currentCategory = "all";
+
+    function filterPrompts() {
+      const keyword = document.getElementById("promptSearchInput").value.trim().toLowerCase();
+      let filtered = PROMPT_DATABASE;
+
+      if (currentCategory !== "all") {
+        filtered = filtered.filter(p => p.cat === currentCategory);
+      }
+
+      if (keyword) {
+        filtered = filtered.filter(p => 
+          p.title.toLowerCase().includes(keyword) ||
+          p.desc.toLowerCase().includes(keyword) ||
+          p.content.toLowerCase().includes(keyword) ||
+          p.tag.toLowerCase().includes(keyword)
+        );
+      }
+
+      renderPromptsGrid(filtered);
+    }
+
+    function quickFilterCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll(".cat-pill").forEach(pill => {
+        pill.classList.remove("bg-blue-100", "text-blue-800", "dark:bg-blue-900/60", "dark:text-blue-200");
+        pill.classList.add("bg-custom-sub");
+      });
+      if (btn) {
+        btn.classList.add("bg-blue-100", "text-blue-800", "dark:bg-blue-900/60", "dark:text-blue-200");
+        btn.classList.remove("bg-custom-sub");
+      }
+      filterPrompts();
+    }
+
+    // ==================== 提示詞調試工作室 ====================
+    function updateStudioPrompt() {
+      const course = document.getElementById("stu-course").value || "高中資訊科技";
+      const target = document.getElementById("stu-target").value || "高一必修、35人班級";
+      const credits = document.getElementById("stu-credits").value || "2學分、每週2節";
+      const folder = document.getElementById("stu-folder").value || "展示素材-資訊科技";
+      const midterm = document.getElementById("stu-midterm").value || "第 8 週";
+      const totalweeks = document.getElementById("stu-totalweeks").value || "18 週";
+      const spec = document.getElementById("stu-slidespec").value || "8張以內、標題50PT、內文20PT";
+
+      const promptTemplate = 
+`【角色設定】你是一位資深的教學設計與智慧備課專家，請為我的課程建立完整自動化教學矩陣。
+
+【基本資料】
+• 課程名稱：《${course}》(${target}、${credits})
+• 授課總時長：${totalweeks} (期中評量訂於${midterm})
+• 雲端資源庫目錄："${folder}"
+
+【任務執行指引】
+1. 請以「${folder}」資料夾中的教材基準與系所核心能力為核心，擬定 ${totalweeks} 的教學進度表與目標對應表。
+2. 進行一致性檢查：確保評量指標與每週主題對應無誤，並列出可能的教學盲點。
+3. 將主要講義重組為課堂精煉簡報：遵循「${spec}」之風格，每頁聚焦單一核心概念並強化數據呈現。
+4. 簡報產出完畢後自動轉為 PPTX 格式，歸檔回我的雲端硬碟 "${folder} > 簡報" 資料夾。`;
+
+      const outputEl = document.getElementById("studioOutputText");
+      if (outputEl) {
+        outputEl.value = promptTemplate;
+        document.getElementById("charCount").innerText = `字數統計: ${promptTemplate.length} 字`;
+      }
+    }
+
+    function populateStudio(promptId) {
+      const item = PROMPT_DATABASE.find(p => p.id === promptId);
+      if (!item) return;
+
+      const outputEl = document.getElementById("studioOutputText");
+      if (outputEl) {
+        outputEl.value = item.content;
+        document.getElementById("charCount").innerText = `字數統計: ${item.content.length} 字`;
+      }
+    }
+
+    function loadStudioPreset(type) {
+      if (type === 't01') {
+        document.getElementById("stu-course").value = "個體經濟學";
+        document.getElementById("stu-target").value = "大二必修、120人大班";
+        document.getElementById("stu-credits").value = "3學分、每週3節";
+        document.getElementById("stu-folder").value = "展示素材-教學";
+        document.getElementById("stu-midterm").value = "第 8 週";
+        document.getElementById("stu-totalweeks").value = "18 週";
+        document.getElementById("stu-slidespec").value = "8張以內、標題50PT、內文20PT、對比色彩";
+      } else if (type === 'math') {
+        document.getElementById("stu-course").value = "國中數學-二元一次方程式";
+        document.getElementById("stu-target").value = "國七必修、30人班級";
+        document.getElementById("stu-credits").value = "4節/週";
+        document.getElementById("stu-folder").value = "展示素材-國中數學";
+        document.getElementById("stu-midterm").value = "第 10 週";
+        document.getElementById("stu-totalweeks").value = "20 週";
+        document.getElementById("stu-slidespec").value = "10張以內、保留例題解題步驟、標題48PT";
+      } else if (type === 'bio') {
+        document.getElementById("stu-course").value = "高中生物-細胞呼吸與光合作用";
+        document.getElementById("stu-target").value = "高二選修、32人班級";
+        document.getElementById("stu-credits").value = "2學分、每週2節";
+        document.getElementById("stu-folder").value = "展示素材-自然生物";
+        document.getElementById("stu-midterm").value = "第 8 週";
+        document.getElementById("stu-totalweeks").value = "18 週";
+        document.getElementById("stu-slidespec").value = "8張、標明ATP反應流程圖、標題50PT";
+      }
+      updateStudioPrompt();
+    }
+
+    // ==================== 複製功能與 TOAST 提示 ====================
+    function copyText(elementId, btn) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const text = el.innerText || el.value;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast("提詞已成功複製到剪貼簿！");
+        if (btn) {
+          const original = btn.innerHTML;
+          btn.innerHTML = `<span>✓ 已複製</span>`;
+          setTimeout(() => btn.innerHTML = original, 1800);
+        }
+      });
+    }
+
+    function copyContentDirectly(promptId, btn) {
+      const item = PROMPT_DATABASE.find(p => p.id === promptId);
+      if (!item) return;
+      navigator.clipboard.writeText(item.content).then(() => {
+        showToast("提詞已成功複製到剪貼簿！");
+        if (btn) {
+          const original = btn.innerHTML;
+          btn.innerHTML = `<span>✓ 已複製</span>`;
+          setTimeout(() => btn.innerHTML = original, 1800);
+        }
+      });
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      const msg = document.getElementById("toastMsg");
+      if (toast && msg) {
+        msg.innerText = message;
+        toast.classList.remove("translate-y-20", "opacity-0");
+        toast.classList.add("translate-y-0", "opacity-100");
+        setTimeout(() => {
+          toast.classList.remove("translate-y-0", "opacity-100");
+          toast.classList.add("translate-y-20", "opacity-0");
+        }, 2200);
+      }
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // ==================== 初始化載入 ====================
+    window.addEventListener("DOMContentLoaded", () => {
+      // 1. 檢查通行狀態
+      checkAuthStatus();
+
+      // 2. 恢復使用者字級設定
+      const savedFontSize = localStorage.getItem("gemini_font_size") || "md";
+      setFontSize(savedFontSize);
+
+      // 3. 恢復使用者布景設定
+      const savedTheme = localStorage.getItem("gemini_theme") || "light";
+      setTheme(savedTheme);
+
+      // 4. 渲染提詞卡片總覽
+      renderPromptsGrid(PROMPT_DATABASE);
+
+      // 5. 初始化工作室內容
+      updateStudioPrompt();
+    });
+  </script>
+</body>
+</html>
